@@ -83,7 +83,7 @@ object Isaac_Chien_task2 {
           .sum
 
 
-//        ((userU, userV),numerator)
+        //        ((userU, userV),numerator)
         val denomLeft = sharedMovies
           .map( movieId => {
             Math.pow(userMovieRatingMap(userU, movieId) - ru, 2)
@@ -100,8 +100,8 @@ object Isaac_Chien_task2 {
 
         (Set(pair._1._1, pair._2._1), if(wuv.isNaN) 0 else wuv) // pearson coorelation w
       })
-//      .collect()
-//      .foreach(println)
+    //      .collect()
+    //      .foreach(println)
 
 
     println("predicting")
@@ -138,15 +138,15 @@ object Isaac_Chien_task2 {
         println("joining ruiRuWuv")
         val ruiRuWuv = ruiRu
           .join(usersWuv)
-//          .collect()
-//          .foreach(println)
+        //          .collect()
+        //          .foreach(println)
         println("ruiRuWuv size: " + ruiRuWuv.countApprox(2000, .5))
         println("numerator")
-//        println("ra: " + ra)
+        //        println("ra: " + ra)
         val numerator = ruiRuWuv.map(joined => {
-            (joined._2._1 * joined._2._2)
-          })
-          .sum()
+          (joined._2._1 * joined._2._2)
+        })
+        .sum()
 
         println("numerator: " + numerator)
 
