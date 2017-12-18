@@ -82,8 +82,6 @@ object Isaac_Chien_task2 {
           } )
           .sum
 
-
-        //        ((userU, userV),numerator)
         val denomLeft = sharedMovies
           .map( movieId => {
             Math.pow(userMovieRatingMap(userU, movieId) - ru, 2)
@@ -100,11 +98,8 @@ object Isaac_Chien_task2 {
 
         (Set(pair._1._1, pair._2._1), if(wuv.isNaN) 0 else wuv) // pearson coorelation w
       })
-    //      .collect()
-    //      .foreach(println)
 
 
-    println("predicting")
     val prediction = userMoviePredict
       .foreach(userMovie => {
         val userA = userMovie._1
@@ -113,7 +108,7 @@ object Isaac_Chien_task2 {
         val moviesUserA = userMoviesMap(userA)._1
         val ra = userMoviesMap(userA)._2
 
-        // filter map to have only users that have rated moviei
+        // filter map to have only users that have rated movie i
         val otherUsers = userMovies // usermovies average
           .filter(userMovie => (userMovie._1 != userA))
           .filter(userMovie => (userMovie._2._1.contains(movieI)))
@@ -123,7 +118,6 @@ object Isaac_Chien_task2 {
           .map(userMovie => {
           val userU = userMovie._1
           val moviesUserU = userMovie._2._1
-          println("userU: " + userU)
 
           val coratedMovies = moviesUserU.intersect(moviesUserA)
 
@@ -134,28 +128,19 @@ object Isaac_Chien_task2 {
           val rui = userMovieRatingMap(userU, movieI)
           (Set(userA, userU), (rui - ru))
         })
-        // TOO SLOW. MUST JOIN OR SOMETHING ELSE.
-        println("joining ruiRuWuv")
         val ruiRuWuv = ruiRu
           .join(usersWuv)
-        //          .collect()
-        //          .foreach(println)
-        println("ruiRuWuv size: " + ruiRuWuv.countApprox(2000, .5))
-        println("numerator")
-        //        println("ra: " + ra)
         val numerator = ruiRuWuv.map(joined => {
           (joined._2._1 * joined._2._2)
         })
         .sum()
 
-        println("numerator: " + numerator)
 
         val denominator = ruiRuWuv
           .map(joined => {
             Math.abs(joined._2._2)
           })
           .sum
-        println("denominator: " + denominator)
 
         println("Predict: " + (userA, movieI), (numerator / denominator) + ra )
 
