@@ -9,7 +9,7 @@ Task 2: A user-based CF Recommendation system using Spark and Pearson correlatio
 
 Run each task with arguments [rating file] [testing file]
 
-The dataset is from MovieLens: https://grouplens.org/datasets/movielens/ <br/>
+The dataset is ml-latest-small.zip from MovieLens: https://grouplens.org/datasets/movielens/ <br/>
 You may use ratings.csv with testing.csv for a large testcase or ratings_small.csv with testing_small.csv for a small testcase.
 
 ### Prerequisites
